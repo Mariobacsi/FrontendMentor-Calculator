@@ -1,3 +1,13 @@
+*.sketch
+*.fig
+
+*.xd
+
+.DS_Store
+.prettierignore
+
+#gitignore start
+
 .snowpack
 build
 node_modules
