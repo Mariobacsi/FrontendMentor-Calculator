@@ -13,7 +13,7 @@
       </button>
     </div>
     <h2
-      class="text-white uppercase mr-4 text-sm font-semibold col-auto text-right col-span-2"
+      class="text-white uppercase mr-4 text-sm font-semibold text-right col-span-2"
     >
       Theme
     </h2>
