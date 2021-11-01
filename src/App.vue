@@ -14,12 +14,17 @@ export default {
 </script>
 
 <template>
-  <div class="wrapper">
-    <div>
-      <h1>calc</h1>
+  <div class=" w-10/12 md:w-2/5 lg:w-1/3 mx-auto mt-8 grid gap-4">
+    <div class="flex flex-row justify-between items-end">
+      <p class="text-white align-text-bottom font-bold text-2xl lowercase">
+        calc
+      </p>
       <theme-selector></theme-selector>
     </div>
-    <display></display>
-    <numpad></numpad>
+    <display class="bg-main-dark"></display>
+    <numpad class="bg-main-base"></numpad>
   </div>
 </template>
+
+<style>
+</style>

@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useCalcStore = defineStore("calc", {
   state: () => ({
     storage: 0,
-    display: 1999,
+    display: "",
     displayHistory: "",
   }),
   getters: {

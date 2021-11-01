@@ -1,5 +1,10 @@
 <template>
-  <button @click="trigger(value)">{{ value }}</button>
+  <button
+    class="bg-white border-b-2 text-xl lg:text-2xl font-bold border-calcbutton-shade rounded"
+    @click="trigger(value)"
+  >
+    {{ value }}
+  </button>
 </template>
 
 <script>
@@ -23,11 +28,11 @@ export default {
       },
     },
   },
-  methods:{
-      trigger(value){
-          this.funct(value)
-      }
-  }
+  methods: {
+    trigger(value) {
+      this.funct(value);
+    },
+  },
 };
 </script>
 
