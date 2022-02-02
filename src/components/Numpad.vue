@@ -3,7 +3,7 @@
     <numpad-button v-for="button in buttons" :key="button"
     :value="button.value || button"
     :class="button.css"
-    :funct="button.function"
+    :trigger="button.function"
     />
   </div>
 </template>

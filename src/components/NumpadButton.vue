@@ -1,7 +1,7 @@
 <template>
   <button
     class="bg-white border-b-2 text-xl lg:text-2xl font-bold border-calcbutton-shade rounded"
-    @click="trigger()"
+    @click="trigger"
   >
     {{ value }}
   </button>
@@ -21,16 +21,11 @@ export default {
   },
   props: {
     value: [String, Number],
-    funct: {
+    trigger: {
       type: Function,
       default() {
         this.addValue(this.value);
       },
-    },
-  },
-  methods: {
-    trigger() {
-      this.funct(this.value);
     },
   },
 };
