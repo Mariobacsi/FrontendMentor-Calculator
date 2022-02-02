@@ -22,10 +22,16 @@ export const useCalcStore = defineStore("calc", {
       this.display = this.display.slice(0, -1);
     },
     addValue(value) {
-      const lastChar = this.display.slice(-1)
-      if(this.display == "" && value == 0) return
-      if(isNaN(value) && isNaN(lastChar)) this.removeValue()
+      if(this.display == "" && (value == 0 || value == '.')) return
+      if(isNaN(value) && isNaN(this.display.slice(-1))) this.removeValue()
       this.display += value;
     },
+    evaluate() {
+      if(isNaN(this.display.charAt(0))) this.display = this.storage + this.display
+      if(isNaN(this.display.slice(-1))) this.removeValue()
+      const e = eval(this.display)
+      this.storage = e
+      this.clear()
+    }
   },
 });

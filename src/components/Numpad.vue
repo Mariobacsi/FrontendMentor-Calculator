@@ -36,7 +36,7 @@ export default {
       },
       {
         value: "=",
-        function: undefined,
+        function: calc.evaluate,
         css: "col-span-2 text-white bg-red-600 border-red-800"
       }
     ]
