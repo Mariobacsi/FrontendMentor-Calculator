@@ -17,13 +17,15 @@ export const useCalcStore = defineStore("calc", {
   actions: {
     clear() {
       this.display = "";
-      this.storage = 0;
-    },
-    addValue(value) {
-      this.display += value;
     },
     removeValue() {
-      this.state.display.slice(0, -1);
+      this.display = this.display.slice(0, -1);
+    },
+    addValue(value) {
+      const lastChar = this.display.slice(-1)
+      if(this.display == "" && value == 0) return
+      if(isNaN(value) && isNaN(lastChar)) this.removeValue()
+      this.display += value;
     },
   },
 });
