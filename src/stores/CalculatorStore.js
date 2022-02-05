@@ -2,56 +2,67 @@ import { defineStore } from "pinia";
 
 export const useCalcStore = defineStore("calc", {
   state: () => ({
-    storage: 0,
-    storageTemp: "",
-    display: "",
-    displayHistory: "",
-    flagZero: false,
+    storage: undefined,
+    calcTemp: "",
+    calc: "",
+    calcHistory: "",
     flagComma: false,
     flagOperator: false,
   }),
   getters: {
     getDisplay: (state) => {
-      if (state.display) return state.display + state.storageTemp;
-      else return state.storageTemp;
+      if (state.calc) return state.calc + state.calcTemp;
+      if (state.calcTemp) return state.calcTemp;
+      return "";
     },
     getDisplayHistory: (state) => {
-      return state.displayHistory;
+      if (state.calcHistory) return state.calcHistory + "=" + state.storage;
+      return "";
     },
   },
   actions: {
     clear() {
-      this.display = "";
-      this.displayHistory = "";
-      this.storage = 0;
+      this.calc = "";
+      this.calcTemp = "";
+      this.calcHistory = "";
+      this.storage = undefined;
+      this.flagOperator = false;
+      this.flagComma = false;
     },
     removeValue() {
-      if (this.storageTemp === "") this.display = this.display.slice(0, -1);
-      else this.storageTemp = this.storageTemp.slice(0, -1);
+      if (this.calcTemp === "") this.calc = this.calc.slice(0, -1);
+      else this.calcTemp = this.calcTemp.slice(0, -1);
     },
     addValue(value) {
-      // if(this.display == "" && (value == 0 || value == '.')) return
-      // if (value == 0) {
-      //   if (!this.flagZero) this.flagZero = true;
-      //   else return;
-      // } else this.flagZero = false;
-      this.storageTemp += value;
+      this.calcTemp += value;
+      this.flagOperator = false;
     },
     addOperator(value) {
       if (this.flagOperator) this.removeValue();
       else {
-        this.display += this.storageTemp;
+        this.removeLeadingZeros();
         this.flagOperator = true;
       }
-      this.display += value;
+      this.calc += value;
     },
     evaluate() {
-      // if(isNaN(this.display.charAt(0))) this.display = this.storage + this.display
-      if (isNaN(this.display.slice(-1))) this.removeValue();
-      const e = eval(this.display);
-      this.storage = e;
-      this.displayHistory = this.display;
-      this.display = "";
+      this.removeLeadingZeros();
+
+      console.log("lastchar", this.calc.charAt(this.calc.length-1));
+      if ("+-./*".includes(this.calc.charAt(this.calc.length-1))) this.removeValue();
+      this.flagOperator = false;
+      this.flagComma = false;
+
+      if (this.storage && "+-./*".includes(this.calc.charAt(0)))
+        this.calc = this.storage + this.calc;
+
+      this.storage = eval(this.calc);
+      this.calcHistory = this.calc;
+      this.calc = "";
+    },
+    removeLeadingZeros() {
+      if (this.calcTemp != "") this.calc += this.calcTemp.replace(/^0+/, "");
+      this.calcTemp = "";
     },
   },
 });

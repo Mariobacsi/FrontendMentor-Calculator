@@ -1,12 +1,10 @@
 <template>
   <div class="rounded-md text-white font-bold p-3">
-    <h3 v-if="getDisplayHistory">{{ getDisplayHistory }}</h3>
+    <h3 v-if="getDisplay">
+      {{ getDisplayHistory }}
+    </h3>
     <h2 class="text-right text-xl lg:text-2xl">
-      {{
-        !getDisplay || getDisplay === undefined || getDisplay === ""
-          ? "0"
-          : getDisplay
-      }}
+      {{ getDisplay ? getDisplay : getDisplayHistory ? getDisplayHistory : 0 }}
     </h2>
   </div>
 </template>
@@ -25,6 +23,7 @@ export default {
 
     return {
       getDisplay,
+      getDisplayHistory,
     };
   },
 };
