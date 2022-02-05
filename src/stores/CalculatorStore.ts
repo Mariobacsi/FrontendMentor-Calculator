@@ -33,27 +33,36 @@ export const useCalcStore = defineStore("calc", {
       if (this.calcTemp === "") this.calc = this.calc.slice(0, -1);
       else this.calcTemp = this.calcTemp.slice(0, -1);
     },
-    addValue(value) {
+    addValue(value: string) {
       this.calcTemp += value;
       this.flagOperator = false;
     },
-    addOperator(value) {
+    addComma() {
+      this.removeLeadingZeros();
+      if (!this.flagComma) {
+        this.calcTemp += ".";
+        this.flagComma = this.flagOperator = true;
+      }
+    },
+    addOperator(value: string) {
       if (this.flagOperator) this.removeValue();
       else {
         this.removeLeadingZeros();
         this.flagOperator = true;
       }
       this.calc += value;
+      this.flagComma = false;
     },
     evaluate() {
       this.removeLeadingZeros();
 
-      console.log("lastchar", this.calc.charAt(this.calc.length-1));
-      if ("+-./*".includes(this.calc.charAt(this.calc.length-1))) this.removeValue();
+      console.log("lastchar", this.calc.charAt(this.calc.length - 1));
+      if ("+-./*".includes(this.calc.charAt(this.calc.length - 1)))
+        this.removeValue();
       this.flagOperator = false;
       this.flagComma = false;
 
-      if (this.storage && "+-./*".includes(this.calc.charAt(0)))
+      if (this.storage && "+-/*".includes(this.calc.charAt(0)))
         this.calc = this.storage + this.calc;
 
       this.storage = eval(this.calc);

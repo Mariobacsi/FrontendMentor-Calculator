@@ -56,6 +56,8 @@ export default {
         ? calc.removeValue()
         : "+-/x".includes(button)
         ? calc.addOperator(button)
+        : button == "."
+        ? calc.addComma()
         : button == "RESET"
         ? calc.clear()
         : button == "="
