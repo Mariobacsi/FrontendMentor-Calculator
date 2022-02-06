@@ -4,8 +4,12 @@ export default {
     public: '/',
     src: '/dist',
   },
+  devOptions: {
+    tailwindConfig: './tailwind.config.js',
+  },
   plugins: [
     '@snowpack/plugin-vue',
+    '@snowpack/plugin-postcss'
   ],
   routes: [
     /* Enable an SPA Fallback in development: */

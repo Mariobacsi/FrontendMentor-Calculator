@@ -1,6 +1,10 @@
-import {createApp} from "vue";
-import App from './App.vue';
- 
+import { createApp } from "vue";
+import App from "./App.vue";
+
+import { createPinia } from "pinia";
+
 let app = createApp(App);
 
-let vm = app.mount('#root');
+app.use(createPinia());
+
+let vm = app.mount("#root");
