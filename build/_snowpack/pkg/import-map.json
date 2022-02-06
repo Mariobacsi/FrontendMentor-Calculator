@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "pinia": "./pinia.js",
+    "vue": "./vue.js"
+  }
+}
