@@ -3,14 +3,14 @@
     <h3 v-if="getDisplay">
       {{ getDisplayHistory }}
     </h3>
-    <h2 class="text-right text-xl lg:text-2xl">
+    <h2 class="text-right text-xl">
       {{ getDisplay ? getDisplay : getDisplayHistory ? getDisplayHistory : 0 }}
     </h2>
   </div>
 </template>
 
 <script>
-import { useCalcStore } from "../stores/CalculatorStore";
+import { useCalcStore } from "../../stores/CalculatorStore";
 import { storeToRefs } from "pinia";
 
 export default {

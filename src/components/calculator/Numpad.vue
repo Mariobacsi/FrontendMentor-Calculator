@@ -1,24 +1,22 @@
 <template>
   <div class="grid grid-cols-4 gap-3 p-5 rounded-md">
-    <numpad-button
+    <button
       v-for="button in buttons"
       :key="button.value || button"
       :value="button.value || button"
+      class="bg-white border-b-2 text-2xl font-bold border-calcbutton-shade rounded"
       :class="button.css"
       @click="this.click(button.value || button)"
-    />
+    >
+      {{ button.value || button }}
+    </button>
   </div>
 </template>
 <script>
-import { useCalcStore } from "../stores/CalculatorStore";
-
-import NumpadButton from "./NumpadButton.vue";
+import { useCalcStore } from "../../stores/CalculatorStore";
 
 export default {
   name: "Numpad",
-  components: {
-    NumpadButton,
-  },
   setup() {
     const calc = useCalcStore();
     const buttons = [
@@ -27,7 +25,7 @@ export default {
       9,
       {
         value: "DEL",
-        css: "text-white border-gray-800 bg-gray-500",
+        css: "text-sm text-white border-gray-800 bg-gray-500",
       },
       4,
       5,
@@ -43,7 +41,7 @@ export default {
       "*",
       {
         value: "RESET",
-        css: "col-span-2 text-white border-gray-800 bg-gray-500",
+        css: "text-sm col-span-2 text-white border-gray-800 bg-gray-500",
       },
       {
         value: "=",
